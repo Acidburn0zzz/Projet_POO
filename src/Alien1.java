@@ -5,12 +5,12 @@ import iut.Game;
  */
 public class Alien1 extends Vaisseau {
     public Alien1(Game g, int x, int y) {
-        super(g, "GrandAsteroide", true, x, y);
+        super(g, "Alien1", true, x, y);
     }
     public void move(long dt){
-        moveX(-10);
         if (getMiddleX()<0)
             detruit();
+        moveX(-10);
     }
     public void specialMove(long dt) {
 
@@ -18,7 +18,6 @@ public class Alien1 extends Vaisseau {
 
     @Override
     protected void detruit() {
-        game().add(new Alien1(game(), game().getWidth(), (int)(Math.random()*game().height())));
         game().remove(this);
     }
 }
