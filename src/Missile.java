@@ -5,15 +5,21 @@ import iut.Objet;
  * Created by MrMan on 30/05/2016.
  */
 public class Missile extends BonusMalus {
-    public Missile(Game g, String nom, int x, int y, Joueur j) {
-        super(g, nom, x, y, j);
+    public Missile(Joueur j, int x, int y) {
+        super(j.game(), "Missile", x, y);
     }
     @Override
     public void effect(Objet o){
-
+        if (o.isEnnemy()){
+            Ennemi ennemi = (Ennemi) o;
+            if(ennemi!=null)
+                if(ennemi.isDestructible())
+                    ennemi.detruit();
+            game().remove(this);
+        }
     }
     @Override
     public void move(long dt){
-
+        moveX(10);
     }
 }

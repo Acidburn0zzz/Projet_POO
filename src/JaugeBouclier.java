@@ -1,15 +1,13 @@
 import iut.Game;
 
+import java.util.ArrayList;
+
 /**
  * Created by MrMan on 30/05/2016.
  */
 public class JaugeBouclier extends Afficheurs {
-    public JaugeBouclier(Game g, String nom, double _x, double _y) {
-        super(g, nom, _x, _y);
-    }
-
-    @Override
-    public void move(long dt){
-
+    private static ArrayList<JaugeBouclier> list = new ArrayList<>();
+    public JaugeBouclier(Joueur j) {
+        super(j.game(), "JaugeBouclier", list.size()*40, 60);
     }
 }

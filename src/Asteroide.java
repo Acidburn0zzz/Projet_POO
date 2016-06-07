@@ -8,5 +8,17 @@ public abstract class Asteroide extends Ennemi {
         super(g, nom, x, y);
     }
 
+    @Override
+    public void move(long l) {
+        moveX(-10);
+    }
+
+    @Override
+    protected boolean isDestructible() {
+        return true;
+    }
+
+
     protected abstract void split();
+
 }

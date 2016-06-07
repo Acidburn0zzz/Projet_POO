@@ -1,15 +1,13 @@
 import iut.Game;
 
+import java.util.ArrayList;
+
 /**
  * Created by MrMan on 30/05/2016.
  */
 public class JaugeVie extends Afficheurs {
-    public JaugeVie(Game g, String nom, double _x, double _y, Joueur j) {
-        super(g, nom, _x, _y);
-    }
-
-    @Override
-    public void move(long dt){
-
+    private static ArrayList<JaugeVie> list = new ArrayList<>();
+    public JaugeVie(Joueur j) {
+        super(j.game(), "JaugeVie", list.size()*40, 20);
     }
 }

@@ -6,17 +6,25 @@ import iut.Objet;
  */
 public class Bloqueur extends BonusMalus {
     private int duree;
-    public Bloqueur(Game g, String nom, int x, int y, Joueur j) {
-        super(g, nom, x, y, j);
+    private Joueur joueur;
+    public Bloqueur(Game g, int x, int y, Joueur j) {
+        super(g, "Bloqueur", x, y);
+        duree = 100;
+        joueur = j;
     }
 
     @Override
     public void effect(Objet objet) {
-        super.effect(objet);
+
     }
 
     @Override
     public void move(long l) {
-        super.move(l);
+        duree -= l;
+        if (duree<0){
+            joueur.enleveBonus(this);
+            joueur.debloque();
+            game().remove(this);
+        }
     }
 }

@@ -12,7 +12,9 @@ public abstract class Ennemi extends ObjetTouchable {
 
     @Override
     public void effect(Objet objet) {
-
+        if(objet.isFriend() && isDestructible()){
+            detruit();
+        }
     }
 
     @Override
@@ -22,19 +24,22 @@ public abstract class Ennemi extends ObjetTouchable {
 
     @Override
     public boolean isEnnemy() {
-        return false;
+        return true;
     }
 
     @Override
-    public void move(long l) {
+    public void move(long l) {  //Ennemi.move
+        if (getLeft()<0)
+            game().remove(this);
+        else{                  //Vitesse attribut privé ?
+
+        }
 
     }
 
-    protected void specialMove(long dt){
-
-    }
+    protected abstract void specialMove(long dt);
 
     protected abstract boolean isDestructible();
 
-    ;
+    protected abstract void detruit();
 }

@@ -5,8 +5,8 @@ import iut.Objet;
  * Created by MrMan on 30/05/2016.
  */
 public class Pack extends BonusMalus {
-    public Pack(Game g, String nom, int x, int y, Joueur j) {
-        super(g, nom, x, y, j);
+    public Pack(int x, int y, Joueur j) {
+        super(j.game(), "Pack", x, y);
     }
 
     @Override

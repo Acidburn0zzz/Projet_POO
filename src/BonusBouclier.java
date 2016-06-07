@@ -12,6 +12,13 @@ public class BonusBouclier extends ObjetTouchable {
 
     @Override
     public void effect(Objet objet) {
+        if (objet.isFriend()){
+            Joueur joueur = (Joueur) objet;
+            Bouclier bouclier = new Bouclier(joueur);
+            joueur.game().add(bouclier);
+            joueur.ajouteBonus(bouclier);
+            joueur.game().remove(this);
+        }
 
     }
 
