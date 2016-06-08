@@ -3,7 +3,7 @@
  */
 public class main {
     public static void main(String[] args) {
-        Jeu jeu = new Jeu(1920, 1080, "Alexsteroide");
+        Jeu jeu = new Jeu(1650, 1000, "Alexsteroide");
         jeu.run();
     }
 }
