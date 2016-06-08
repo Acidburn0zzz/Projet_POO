@@ -8,7 +8,7 @@ public class Horloge extends Objet {
     private long heureDebut;
     private Niveau niveau;
 
-    public Horloge(Game g, Niveau n) {
+    public Horloge(Game g ,Niveau n) {
         super(g, "Horloge", 0, 0); //Coordonées ?
         heureDebut = 0;
         niveau = n;
@@ -31,7 +31,7 @@ public class Horloge extends Objet {
 
     @Override
     public boolean isEnnemy() {
-        return false;
+        return true;
     }
 
     @Override
