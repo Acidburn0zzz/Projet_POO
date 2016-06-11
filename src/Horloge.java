@@ -14,25 +14,10 @@ public class Horloge extends Objet {
         niveau = n;
     }
 
-    @Override
-    public boolean collision(Objet objet) {
-        return false;
-    }
-
-    @Override
-    public void effect(Objet objet) {
-
-    }
-
-    @Override
-    public boolean isFriend() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnnemy() {
-        return true;
-    }
+    @Override public boolean collision(Objet objet) {return false;}
+    @Override public void effect(Objet objet) {}
+    @Override public boolean isFriend() {return false;}
+    @Override public boolean isEnnemy() {return false;}
 
     @Override
     public void move(long l) {

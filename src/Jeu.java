@@ -17,7 +17,7 @@ public class Jeu extends Game {
         Joueur joueur = new Joueur(this, "Joueur", 100, this.getHeight()/2);
         this.add(joueur);
         addMouseInteractiveObject(joueur);
-        //this.add(new Alien1(this, this.getWidth(), 500));
+        this.add(new Alien1(this, this.getWidth(), 500));
         this.add(new Cartouches(joueur));
         this.add(new JaugeVie(joueur));
         Niveau niveau = new Niveau(1, this);

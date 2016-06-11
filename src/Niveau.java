@@ -5,33 +5,39 @@ import iut.Game;
 import iut.Objet;
 
 public class Niveau {
+    private Game game;
     private int tempsActuel;
+    private int tempsVague;
+
     private int nbAsteroide;
     private int nbAlien1;
     private int nbAlien2;
-    private int niveau;
-    private int dureeNiveau;
-    private int coefDifficulte;
-    private int nbAsteroideTotal;
 
-    private Game g;
+    private int nxtAsteroide;
+    private int nxtAlien1;
+    private int nxtAlien2;
 
     Niveau(int numero, Game game){
-        niveau = numero;
-        dureeNiveau = 8000;
-        coefDifficulte = 2;
-        g = game;
-        nbAsteroideTotal = 4;
+        this.game = game;
+        int coef = (int) (7*Math.sqrt(numero));
+        tempsVague = (int) (2.8*coef)*1000;
+        tempsActuel = 0;
+
+        nbAsteroide = (int) (1.08 * coef);
+        nbAlien1 = (int) (0.75*coef);
+        nbAlien2 = (int) (0.6*coef);
+
+        nxtAsteroide = tempsVague/nbAsteroide;
+        nxtAlien1 = tempsVague/nbAlien1;
+        nxtAlien2 = tempsVague/nbAlien2;
     }
     public Objet NouvelObjet(long time){
         tempsActuel += time;
-        if(tempsActuel < dureeNiveau){
-            if((dureeNiveau/nbAsteroideTotal) * (nbAsteroide + 1) <= tempsActuel){
-                GrandAsteroide res = new GrandAsteroide(g, g.getWidth(), (int)(Math.random()*g.getHeight()));
-                nbAsteroide += 1;
-                return res;
-            }
+        Objet objet = null;
+        if(tempsActuel>=nxtAsteroide){  //à reproduire pour les autres ennemie.
+            nxtAsteroide += tempsVague/nbAsteroide;
+            objet = new GrandAsteroide(game, game.getWidth(),(int)(Math.random()*game.getHeight()));
         }
-        return null;
+        return objet;
     }
 }
