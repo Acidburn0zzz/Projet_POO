@@ -10,4 +10,11 @@ public class JaugeBouclier extends Afficheurs {
     public JaugeBouclier(Joueur j) {
         super(j.game(), "JaugeBouclier", list.size()*40, 60);
     }
+
+    @Override
+    public void remove() {
+        JaugeBouclier JaugeBouclier = list.get(list.size());
+        game().remove(JaugeBouclier);
+        list.remove(JaugeBouclier);
+    }
 }

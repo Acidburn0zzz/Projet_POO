@@ -8,6 +8,15 @@ import java.util.ArrayList;
 public class Cartouches extends Afficheurs {
     private static ArrayList<Cartouches> list = new ArrayList<>();
     public Cartouches(Joueur j) {
-        super(j.game(), "Cartouches", list.size()*40, 40);
+        super(j.game(), "Cartouches", 10, j.game().getHeight()-60-list.size()*10);
+        list.add(this);
+    }
+
+
+    @Override
+    public void remove() {
+        Cartouches cartouches = list.get(list.size());
+        game().remove(cartouches);
+        list.remove(cartouches);
     }
 }
