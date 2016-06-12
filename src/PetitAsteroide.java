@@ -8,6 +8,8 @@ public class PetitAsteroide extends Asteroide {
         super(g, "PetitAsteroide", x, y);
     }
 
+    protected static int getHauteurSprite(){return 0;}
+
     @Override
     protected void specialMove(long dt) {
         moveY(Math.sin(dt)*20);

@@ -8,6 +8,8 @@ public class Alien2 extends Vaisseau {
         super(g, "Alien2", true, x, y);
     }
 
+    protected static int getHauteurSprite(){return 0;}
+
     public void move(long dt){
         if (getMiddleX()<0)
             detruit();

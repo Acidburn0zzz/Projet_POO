@@ -8,6 +8,8 @@ public class GrandAsteroide extends Asteroide {
         super(g, "GrandAsteroide", x, y);
     }
 
+    protected static int getHauteurSprite(){return 0;}
+
     @Override
     protected void specialMove(long dt) {
 

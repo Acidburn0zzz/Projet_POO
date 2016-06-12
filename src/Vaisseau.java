@@ -9,6 +9,8 @@ public class Vaisseau extends Ennemi {
         super(g, nom, x, y);
     }
 
+    protected static int getHauteurSprite(){return 0;}
+
     @Override
     protected void specialMove(long dt) {
 

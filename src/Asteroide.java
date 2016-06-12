@@ -8,6 +8,8 @@ public abstract class Asteroide extends Ennemi {
         super(g, nom, x, y);
     }
 
+    protected static int getHauteurSprite(){return 0;}
+
     @Override
     public void move(long l) {
         moveX(-10);

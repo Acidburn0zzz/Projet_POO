@@ -8,6 +8,8 @@ public class Flamme extends Vaisseau {
         super(g, nom, destructible, x, y);
     }
 
+    protected static int getHauteurSprite(){return 0;}
+
     public void move(long dt){
 
     }

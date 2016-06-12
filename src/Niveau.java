@@ -39,19 +39,32 @@ public class Niveau {
         if(tempsActuel>=nxtAsteroide && nbAsteroide>= asteroideSpawned){
             asteroideSpawned++;
             nxtAsteroide += tempsVague/nbAsteroide;
-            objet = new GrandAsteroide(game, game.getWidth(),(int)(Math.random()*game.getHeight()));
+            objet = new GrandAsteroide(game, game.getWidth(), randBorne(0, game.getHeight()-GrandAsteroide.getHauteurSprite()));
         }else if(tempsActuel>=nxtAlien1 && nbAlien1 >= alien1Spawned){
             alien1Spawned++;
             nxtAlien1 += tempsVague/nbAlien1;
-            objet = new Alien1(game, game.getWidth(),(int)(Math.random()*game.getHeight()));
+            objet = new Alien1(game, game.getWidth(), randBorne(0, game.getHeight()-Alien1.getHauteurSprite()));
         }else if(tempsActuel>=nxtAlien2 && nbAlien2 >= alien2Spawned){
             alien2Spawned++;
             nxtAlien2 += tempsVague/nbAlien2;
-            objet = new Alien2(game, game.getWidth(),(int)(Math.random()*game.getHeight()));
+            objet = new Alien2(game, game.getWidth(), randBorne(0,game.getHeight()-Alien2.getHauteurSprite()));
         }
         return objet;
     }
     public long waveLength(){return tempsVague;}
 
     public int getNumero(){return numero;}
+
+    /**
+     *
+     * @param a borne inférieur (inclus pour l'interval de retour)
+     * @param b borne supérieur (exclus dans l'interval de retour)
+     * @return nombre aléatoire dans l'interval [a;b[
+     */
+    private int randBorne(int a, int b){
+        if(a<b) {
+            return (int) Math.random() % (b - a) + a;
+        }
+        else return (int) Math.random() % (a - b) + b;
+    }
 }

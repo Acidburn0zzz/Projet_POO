@@ -7,6 +7,9 @@ public class Alien1 extends Vaisseau {
     public Alien1(Game g, int x, int y) {
         super(g, "Alien1", true, x, y);
     }
+
+    protected static int getHauteurSprite(){return 0;}
+
     public void move(long dt){
         if (getMiddleX()<0)
             detruit();

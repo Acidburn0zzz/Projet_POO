@@ -6,6 +6,7 @@ import iut.ObjetTouchable;
  * Created by MrMan on 30/05/2016.
  */
 public abstract class Ennemi extends ObjetTouchable {
+
     public Ennemi(Game g, String nom, int x, int y) {
         super(g, nom, x, y);
     }
