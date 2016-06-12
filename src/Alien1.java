@@ -13,7 +13,7 @@ public class Alien1 extends Vaisseau {
         moveX(-10);
     }
     public void specialMove(long dt) {
-
+        System.out.println(dt);
     }
 
     @Override

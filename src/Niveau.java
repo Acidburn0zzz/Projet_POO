@@ -6,38 +6,52 @@ import iut.Objet;
 
 public class Niveau {
     private Game game;
-    private int tempsActuel;
-    private int tempsVague;
+    private int numero;
+    private long tempsActuel; //Le temps écoulé depuis le début de la vague
+    private long tempsVague; //La durée de la vague
 
-    private int nbAsteroide;
-    private int nbAlien1;
-    private int nbAlien2;
+    private int nbAsteroide, asteroideSpawned; //Le nombre d'ennemi créer et le nombre actuellement crée
+    private int nbAlien1, alien1Spawned;
+    private int nbAlien2, alien2Spawned;
 
-    private int nxtAsteroide;
+    private int nxtAsteroide; //L'intervalle entre l'apparition de deux ennemie du même type
     private int nxtAlien1;
     private int nxtAlien2;
 
     Niveau(int numero, Game game){
         this.game = game;
-        int coef = (int) (7*Math.sqrt(numero));
-        tempsVague = (int) (2.8*coef)*1000;
+        this.numero = numero;
+        int coef = (int) (7*Math.sqrt(numero)); //7, 9, 12, 14, ...
+        tempsVague = (int) (2.8*coef)*1000; //*1000 pour le millisecondes.
         tempsActuel = 0;
 
-        nbAsteroide = (int) (1.08 * coef);
-        nbAlien1 = (int) (0.75*coef);
-        nbAlien2 = (int) (0.6*coef);
+        nbAsteroide = (int) (1.08 * coef); asteroideSpawned = 0;
+        nbAlien1 = (int) (0.75*coef); alien1Spawned = 0;
+        nbAlien2 = (int) (0.6*coef); alien2Spawned = 0;
 
-        nxtAsteroide = tempsVague/nbAsteroide;
-        nxtAlien1 = tempsVague/nbAlien1;
-        nxtAlien2 = tempsVague/nbAlien2;
+        nxtAsteroide = (int) (tempsVague/nbAsteroide);
+        nxtAlien1 = (int) (tempsVague/nbAlien1);
+        nxtAlien2 = (int) (tempsVague/nbAlien2);
     }
     public Objet NouvelObjet(long time){
         tempsActuel += time;
         Objet objet = null;
-        if(tempsActuel>=nxtAsteroide){  //à reproduire pour les autres ennemie.
+        if(tempsActuel>=nxtAsteroide && nbAsteroide>= asteroideSpawned){
+            asteroideSpawned++;
             nxtAsteroide += tempsVague/nbAsteroide;
             objet = new GrandAsteroide(game, game.getWidth(),(int)(Math.random()*game.getHeight()));
+        }else if(tempsActuel>=nxtAlien1 && nbAlien1 >= alien1Spawned){
+            alien1Spawned++;
+            nxtAlien1 += tempsVague/nbAlien1;
+            objet = new Alien1(game, game.getWidth(),(int)(Math.random()*game.getHeight()));
+        }else if(tempsActuel>=nxtAlien2 && nbAlien2 >= alien2Spawned){
+            alien2Spawned++;
+            nxtAlien2 += tempsVague/nbAlien2;
+            objet = new Alien2(game, game.getWidth(),(int)(Math.random()*game.getHeight()));
         }
         return objet;
     }
+    public long waveLength(){return tempsVague;}
+
+    public int getNumero(){return numero;}
 }

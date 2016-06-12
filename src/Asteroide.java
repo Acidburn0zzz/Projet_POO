@@ -11,6 +11,8 @@ public abstract class Asteroide extends Ennemi {
     @Override
     public void move(long l) {
         moveX(-10);
+        if (getMiddleX()<0)
+            detruit();
     }
 
     @Override
