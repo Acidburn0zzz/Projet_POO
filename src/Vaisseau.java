@@ -5,8 +5,8 @@ import iut.Game;
  */
 public class Vaisseau extends Ennemi {
 
-    public Vaisseau(Game g, String nom, boolean destructible, int x, int y) {
-        super(g, nom, x, y);
+    public Vaisseau(Game g, String nom, int x, int y, double _coefVitesse, double _vitesse, double direction) {
+        super(g, nom, x, y, _coefVitesse, _vitesse, direction);
     }
 
     protected static int getHauteurSprite(){return 0;}
