@@ -5,7 +5,7 @@ import iut.Game;
  */
 public class PetitAsteroide extends Asteroide {
     public PetitAsteroide(Game g, int x, int y, double coefVitesse, double direction) {
-        super(g, "PetitAsteroide", x, y, coefVitesse, 0.8, direction);
+        super(g, "PetitAsteroide", x, y, coefVitesse, 0.4*, direction);
     }
 
 

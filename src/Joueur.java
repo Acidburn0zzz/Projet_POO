@@ -90,7 +90,7 @@ public class Joueur extends ObjetTouchable implements KeyListener, MouseListener
     //MouseListener Interface
         @Override
         public void mousePressed(MouseEvent e) {
-            game().add(new Missile(this, getMiddleX()+40, getMiddleY()));
+            game().add(new Missile(this, getMiddleX()+80, getMiddleY()));
         }
 
         @Override public void mouseClicked(MouseEvent e) {}

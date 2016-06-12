@@ -11,12 +11,12 @@ public abstract class Asteroide extends Ennemi {
 
     @Override
     protected void specialMove(long dt) {
-        if(getTop() <= 100){
+        if(getTop() <= 0){
                 if (getDirectionRad() > Math.PI)
                     setDirectionRad(-getDirectionRad());
 
         }
-        else if( getBottom() >= game().getHeight()-100){
+        else if( getBottom() >= game().getHeight()){
                 if(getDirectionRad() < Math.PI)
                     setDirectionRad(-getDirectionRad());
         }
