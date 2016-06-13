@@ -15,7 +15,8 @@ public class Joueur extends ObjetTouchable implements KeyListener, MouseListener
     private int cartouches;
     private double vitesse;
     private String nom;
-    private int duree;
+    private int dureeBloque;
+    private int dureeTirAleatoire;
     /*
     Array list qui stocke les ennemis et bonus touché par le joueur afin d'éviter le BUG qui se produit
     quand un ennemis n'as pas eu le temps d'être remove mais que le effect est réappellé par le jeu
@@ -24,7 +25,7 @@ public class Joueur extends ObjetTouchable implements KeyListener, MouseListener
 
     public Joueur(Game g, String nom, int x, int y) {
         super(g, nom, x, y);
-        duree = 0;
+        dureeBloque = 0;
         vie = 3;
         vitesse = 1;
         cartouches = 0;
@@ -60,7 +61,7 @@ public class Joueur extends ObjetTouchable implements KeyListener, MouseListener
 
     @Override
     public void move(long l) {
-        if(duree<0) {
+        if(dureeBloque <0) {
             double px = MouseInfo.getPointerInfo().getLocation().getY() - getMiddleY();
             if (Math.abs(px) > 2) {
                 if (Math.abs(px) <= vitesse * l) {
@@ -90,7 +91,9 @@ public class Joueur extends ObjetTouchable implements KeyListener, MouseListener
                 }
             }
         }else
-            duree-=l;
+            dureeBloque -=l;
+        if(dureeTirAleatoire>0)
+            dureeTirAleatoire -= l;
     }
 
     public void addCartouches(int nb){cartouches += nb;}
@@ -99,8 +102,8 @@ public class Joueur extends ObjetTouchable implements KeyListener, MouseListener
     public String getNom() {return nom;}
     public void setNom(String nom) {this.nom = nom;}
 
-    public void bloque(int duree){this.duree = duree;}
-
+    public void bloque(int duree){this.dureeBloque = duree;}
+    public void tirAleatoire(int duree){this.dureeTirAleatoire = duree;}
     //KeyListenerInterface
         @Override public void keyTyped(KeyEvent e) {}
         @Override public void keyPressed(KeyEvent e) {}
@@ -112,7 +115,10 @@ public class Joueur extends ObjetTouchable implements KeyListener, MouseListener
             if(cartouches!=0) {
                 Son son = new Son("Tir.mp3");
                 son.start();
-                game().add(new Missile(this, getMiddleX() + 80, getMiddleY(),0, 1));
+                if(dureeTirAleatoire>0)
+                    game().add(new Missile(this, getMiddleX() + 80, getMiddleY(), MathJeu.randomizeMalusTir20(), 1));
+                else
+                    game().add(new Missile(this, getMiddleX() + 80, getMiddleY(), 0, 1));
                 cartouches--;
                 Cartouches.remove();
             }

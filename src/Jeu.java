@@ -26,6 +26,7 @@ public class Jeu extends Game {
         Niveau niveau = new Niveau(1, this);
         horloge = new Horloge(this, niveau);
         this.add(horloge);
+        this.add(new MalusAngleTir(this, getWidth(), 500));
         Son son = new Son("Musique.mp3");
         son.start();
     }
