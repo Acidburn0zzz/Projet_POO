@@ -53,6 +53,7 @@ public class Jeu extends Game {
 
     @Override
     protected void perdu() {
+        JaugeBouclier.removeAll();
         perdu = true;
         Objet ennemi = new Objet(this, "", 0, 0) {
             @Override public boolean collision(Objet objet) {return false;}
