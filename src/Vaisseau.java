@@ -3,7 +3,7 @@ import iut.Game;
 /**
  * Created by MrMan on 30/05/2016.
  */
-public class Vaisseau extends Ennemi {
+public abstract class Vaisseau extends Ennemi {
     private long tempsTotal;
     public Vaisseau(Game g, String nom, int x, int y, double _coefVitesse, double _vitesse, double direction) {
         super(g, nom, x, y, _coefVitesse, _vitesse, direction);
@@ -12,25 +12,8 @@ public class Vaisseau extends Ennemi {
 
     protected static int getHauteurSprite(){return 0;}
 
-    @Override
-    protected void specialMove(long dt) {
+    @Override protected void detruit() {game().remove(this);}
 
-    }
-
-    public boolean isDestructible(){
-        return true;
-    }
-
-    @Override
-    protected void detruit() {
-        game().remove(this);
-    }
-
-    public long getTempsTotal() {
-        return tempsTotal;
-    }
-
-    public void setTempsTotal(long tempsTotal) {
-        this.tempsTotal = tempsTotal;
-    }
+    public long getTempsTotal() {return tempsTotal;}
+    public void setTempsTotal(long tempsTotal) {this.tempsTotal = tempsTotal;}
 }

@@ -13,8 +13,7 @@ public class Missile extends BonusMalus {
         if (o.isEnnemy()){
             Ennemi ennemi = (Ennemi) o;
             if(ennemi!=null)
-                if(ennemi.isDestructible())
-                    ennemi.detruit();
+                ennemi.detruit();
             game().remove(this);
         }
     }

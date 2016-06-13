@@ -38,7 +38,6 @@ public class Joueur extends ObjetTouchable implements KeyListener, MouseListener
         }
         if(objet.isEnnemy() && !listeCollision.contains(objet)) {
             listeCollision.add(objet);
-            System.out.println("Life removed by" + objet);
             game().remove(objet);
             vie--;
             JaugeVie.remove();

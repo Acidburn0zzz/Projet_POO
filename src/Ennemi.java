@@ -29,7 +29,7 @@ public abstract class Ennemi extends ObjetTouchable {
 
     @Override
     public void effect(Objet objet) {
-        if(objet.isFriend() && isDestructible()){
+        if(objet.isFriend()){
             detruit();
         }
     }
@@ -44,6 +44,7 @@ public abstract class Ennemi extends ObjetTouchable {
 
     }
 
+    /* Mode debug
     public void draw(Graphics g) throws Exception {
         Sprite s = SpriteStore.get().getSprite(this.getNom());
         s.draw(g, (int)getLeft(), (int)getTop());
@@ -60,9 +61,9 @@ public abstract class Ennemi extends ObjetTouchable {
                 getMiddleY()+(int)(Math.sin(getDirectionRad())*getCoefVitesse()*getVitesse()*100));
 
     }
+    */
 
     protected abstract void specialMove(long dt);
-    protected abstract boolean isDestructible();
     protected abstract void detruit();
 
     public double getCoefVitesse() {

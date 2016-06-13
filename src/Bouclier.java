@@ -12,7 +12,7 @@ public class Bouclier extends ObjetTouchable {
     public Bouclier(Joueur j) {
         super(j.game(), "Bouclier", j.getMiddleX()+80, j.getMiddleY());
         joueur = j;
-        duree = 1000;
+        duree = 10000;
         energie = 3;
     }
 
@@ -29,6 +29,7 @@ public class Bouclier extends ObjetTouchable {
     @Override
     public void effect(Objet objet) {
         if (objet.isEnnemy()){
+            System.out.println("Bouclier removed by : " + objet);
             energie--;
             JaugeBouclier.remove();
             if(energie<=0){
@@ -37,6 +38,6 @@ public class Bouclier extends ObjetTouchable {
         }
     }
 
-    @Override public boolean isFriend() {return false;}
+    @Override public boolean isFriend() {return true;}
     @Override public boolean isEnnemy() {return false;}
 }
