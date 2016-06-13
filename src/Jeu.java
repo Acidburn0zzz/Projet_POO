@@ -21,6 +21,8 @@ public class Jeu extends Game {
         addMouseInteractiveObject(joueur);
         Niveau niveau = new Niveau(1, this);
         this.add(new Horloge(this, niveau));
+        Son son = new Son("Musique.mp3");
+        son.start();
     }
 
     @Override
