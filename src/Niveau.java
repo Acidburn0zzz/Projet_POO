@@ -20,6 +20,7 @@ public class Niveau {
 
     private boolean bouclierSpawned;
     private boolean packSpawned;
+    private boolean bloqueurSpawned;
 
     Niveau(int numero, Game game){
         this.game = game;
@@ -38,6 +39,7 @@ public class Niveau {
 
         bouclierSpawned = false;
         packSpawned = false;
+        bloqueurSpawned = false;
     }
     public Objet NouvelObjet(long time){
         tempsActuel += time;
@@ -60,6 +62,9 @@ public class Niveau {
         }else if(!packSpawned){
             packSpawned = true;
             objet = new Pack(game, game.getWidth(), MathJeu.randBorne(0, game.getHeight()-40)); //Corriger le -40
+        }else if(!bloqueurSpawned){
+            bloqueurSpawned = true;
+            objet = new Bloqueur(game, game.getWidth(), MathJeu.randBorne(0, game.getHeight()-40));
         }
         return objet;
     }

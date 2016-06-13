@@ -15,7 +15,7 @@ public class Joueur extends ObjetTouchable implements KeyListener, MouseListener
     private int cartouches;
     private double vitesse;
     private String nom;
-    private boolean bloque;
+    private int duree;
     /*
     Array list qui stocke les ennemis et bonus touché par le joueur afin d'éviter le BUG qui se produit
     quand un ennemis n'as pas eu le temps d'être remove mais que le effect est réappellé par le jeu
@@ -24,7 +24,7 @@ public class Joueur extends ObjetTouchable implements KeyListener, MouseListener
 
     public Joueur(Game g, String nom, int x, int y) {
         super(g, nom, x, y);
-        bloque = false;
+        duree = 0;
         vie = 3;
         vitesse = 1;
         cartouches = 0;
@@ -36,7 +36,7 @@ public class Joueur extends ObjetTouchable implements KeyListener, MouseListener
             listeCollision.add(objet);
             game().remove(objet); //C'est un bonus
         }
-        if(objet.isEnnemy() && !listeCollision.contains(objet)) {
+        if(objet.isEnnemy() && !listeCollision.contains(objet) && !objet.isFriend()) {
             listeCollision.add(objet);
             game().remove(objet);
             vie--;
@@ -54,17 +54,20 @@ public class Joueur extends ObjetTouchable implements KeyListener, MouseListener
 
     @Override
     public void move(long l) {
-        double px = MouseInfo.getPointerInfo().getLocation().getY()-getMiddleY();
-        if(Math.abs(px)>2) {
-            if (Math.abs(px) <= vitesse * l) {
-                moveY(px);
-            } else {
-                if(px>0)
-                    moveY(vitesse*l);
-                else
-                    moveY(-vitesse*l);
+        if(duree<0) {
+            double px = MouseInfo.getPointerInfo().getLocation().getY() - getMiddleY();
+            if (Math.abs(px) > 2) {
+                if (Math.abs(px) <= vitesse * l) {
+                    moveY(px);
+                } else {
+                    if (px > 0)
+                        moveY(vitesse * l);
+                    else
+                        moveY(-vitesse * l);
+                }
             }
-        }
+        }else
+            duree-=l;
     }
 
     public void addCartouches(int nb){cartouches += nb;}
@@ -73,8 +76,7 @@ public class Joueur extends ObjetTouchable implements KeyListener, MouseListener
     public String getNom() {return nom;}
     public void setNom(String nom) {this.nom = nom;}
 
-    public void debloque(){bloque = false;}
-    public void bloque(){bloque = true;}
+    public void bloque(int duree){this.duree = duree;}
 
     //KeyListenerInterface
         @Override public void keyTyped(KeyEvent e) {}

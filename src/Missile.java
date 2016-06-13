@@ -10,7 +10,7 @@ public class Missile extends BonusMalus {
     }
     @Override
     public void effect(Objet o){
-        if (o.isEnnemy()){
+        if (o.isEnnemy() && !o.isFriend()){
             Ennemi ennemi = (Ennemi) o;
             if(ennemi!=null)
                 ennemi.detruit();

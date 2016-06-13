@@ -28,7 +28,7 @@ public class Bouclier extends ObjetTouchable {
 
     @Override
     public void effect(Objet objet) {
-        if (objet.isEnnemy()){
+        if (objet.isEnnemy() && !objet.isFriend()){
             System.out.println("Bouclier removed by : " + objet);
             energie--;
             JaugeBouclier.remove();
@@ -39,5 +39,5 @@ public class Bouclier extends ObjetTouchable {
     }
 
     @Override public boolean isFriend() {return true;}
-    @Override public boolean isEnnemy() {return false;}
+    @Override public boolean isEnnemy() {return true;}
 }

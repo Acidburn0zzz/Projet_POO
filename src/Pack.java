@@ -12,7 +12,7 @@ public class Pack extends ObjetTouchable {
 
     @Override
     public void effect(Objet objet) {
-        if (objet.isFriend()){
+        if (objet.isFriend() && !objet.isEnnemy()){
             Joueur joueur = (Joueur) objet;
             Cartouches cartouches = new Cartouches(joueur);
             joueur.game().remove(this);
