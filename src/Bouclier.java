@@ -38,6 +38,7 @@ public class Bouclier extends ObjetTouchable {
             JaugeBouclier.remove();
             if(energie<=0){
                 game().remove(this);
+                JaugeBouclier.removeAll();
             }
         }
     }

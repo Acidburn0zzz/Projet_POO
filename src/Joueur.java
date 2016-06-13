@@ -42,11 +42,17 @@ public class Joueur extends ObjetTouchable implements KeyListener, MouseListener
             vie--;
             JaugeVie.remove();
             if(vie<=0) {
-                game().remove(this);
-                Cartouches.removeAll();
-                cartouches = 0;
+                mourrir();
             }
         }
+    }
+
+    private void mourrir() {
+        game().remove(this);
+        game().dead();
+        Cartouches.removeAll();
+        JaugeBouclier.removeAll();
+        cartouches = 0;
     }
 
     @Override public boolean isFriend() {return true;}
@@ -106,7 +112,7 @@ public class Joueur extends ObjetTouchable implements KeyListener, MouseListener
             if(cartouches!=0) {
                 Son son = new Son("Tir.mp3");
                 son.start();
-                game().add(new Missile(this, getMiddleX() + 80, getMiddleY()));
+                game().add(new Missile(this, getMiddleX() + 80, getMiddleY(),0, 1));
                 cartouches--;
                 Cartouches.remove();
             }
