@@ -28,6 +28,12 @@ public abstract class Asteroide extends Ennemi {
 
     protected static int getHauteurSprite(){return 0;}
 
+    @Override
+    protected boolean isDestructible() {
+        return true;
+    }
+
+
     protected abstract void split();
 
 }

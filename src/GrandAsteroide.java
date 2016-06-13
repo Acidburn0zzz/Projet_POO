@@ -10,8 +10,6 @@ public class GrandAsteroide extends Asteroide {
         detruit = false;
     }
 
-    protected static int getHauteurSprite(){return 0;}
-
     @Override
     protected void detruit() {
         if(!detruit) {

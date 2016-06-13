@@ -8,9 +8,6 @@ public class PetitAsteroide extends Asteroide {
         super(g, "PetitAsteroide", x, y, coefVitesse, 0.4, direction);
     }
 
-
-    protected static int getHauteurSprite(){return 0;}
-
     @Override
     protected void detruit() {
         game().remove(this);

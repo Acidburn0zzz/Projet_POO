@@ -45,15 +45,15 @@ public class Niveau {
         if(tempsActuel>=nxtAsteroide && nbAsteroide>= asteroideSpawned){
             asteroideSpawned++;
             nxtAsteroide += tempsVague/nbAsteroide;
-            objet = new GrandAsteroide(game, game.getWidth()-100, MathJeu.randBorne(0, game.getHeight()-GrandAsteroide.getHauteurSprite()), 1);
+            objet = new GrandAsteroide(game, game.getWidth()-100, MathJeu.randBorne(0, game.getHeight()-100), 1);
         }else if(tempsActuel>=nxtAlien1 && nbAlien1 >= alien1Spawned){
             alien1Spawned++;
             nxtAlien1 += tempsVague/nbAlien1;
-            objet = new Alien1(game, game.getWidth(), MathJeu.randBorne(0, game.getHeight()-Alien1.getHauteurSprite()), 1);
+            objet = new Alien1(game, game.getWidth(), MathJeu.randBorne(0, game.getHeight()-100), 1);
         }else if(tempsActuel>=nxtAlien2 && nbAlien2 >= alien2Spawned){
             alien2Spawned++;
             nxtAlien2 += tempsVague/nbAlien2;
-            objet = new Alien2(game, game.getWidth(), MathJeu.randBorne(0,game.getHeight()-Alien2.getHauteurSprite()), 1);
+            objet = new Alien2(game, game.getWidth(), MathJeu.randBorne(0,game.getHeight()-100), 1);
         }else if(!bouclierSpawned){ //Ajouter des formules pour le spawn
             bouclierSpawned = true;
             objet = new BonusBouclier(game, game.getWidth(), MathJeu.randBorne(0, game.getHeight()-40));

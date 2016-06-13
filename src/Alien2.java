@@ -12,7 +12,6 @@ public class Alien2 extends Vaisseau {
         super(g, "Alien2", x, y, _coefVitesse, 0.3, Math.PI);
     }
 
-    protected static int getHauteurSprite(){return 0;}
 
     public void specialMove(long dt){
         setTempsTotal(getTempsTotal()+dt);

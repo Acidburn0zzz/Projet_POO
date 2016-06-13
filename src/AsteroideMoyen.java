@@ -11,8 +11,6 @@ public class AsteroideMoyen extends Asteroide {
         detruit = false;
     }
 
-    protected static int getHauteurSprite(){return 0;}
-
 
     @Override
     protected void detruit() {
