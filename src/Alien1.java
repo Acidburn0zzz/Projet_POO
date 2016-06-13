@@ -5,13 +5,16 @@ import iut.Game;
  */
 public class Alien1 extends Vaisseau {
     public Alien1(Game g, int x, int y, double _coefVitesse) {
-        super(g, "Alien1", x, y, _coefVitesse, 8, Math.PI);
+        super(g, "Alien1", x, y, _coefVitesse, 0.4, Math.PI);
     }
 
     protected static int getHauteurSprite(){return 0;}
 
     public void specialMove(long dt){
-        moveX(-10);
+        setTempsTotal(getTempsTotal()+dt);
+        setDirectionRad(Math.atan(Math.sin(getTempsTotal()/150)/0.8)+Math.PI); // on dessine un cosinus
+        moveX(Math.cos(getDirectionRad())*getCoefVitesse()*getVitesse()*dt);
+        moveY(Math.sin(getDirectionRad())*getCoefVitesse()*getVitesse()*dt);
     }
     @Override
     protected void detruit() {

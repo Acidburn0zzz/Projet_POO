@@ -4,14 +4,19 @@ import iut.Game;
  * Created by MrMan on 30/05/2016.
  */
 public class Alien2 extends Vaisseau {
+    public Alien2(Game g, String nom, int x, int y, double _coefVitesse, double _vitesse, double direction) {
+        super(g, nom, x, y, _coefVitesse, _vitesse, direction);
+    }
+
     public Alien2(Game g, int x, int y, double _coefVitesse) {
-        super(g, "Alien2", x, y, _coefVitesse, 8, Math.PI);
+        super(g, "Alien2", x, y, _coefVitesse, 0.3, Math.PI);
     }
 
     protected static int getHauteurSprite(){return 0;}
 
     public void specialMove(long dt){
-        moveX(-10);
+        moveX(Math.cos(getDirectionRad())*getCoefVitesse()*getVitesse()*dt);
+        moveY(Math.sin(getDirectionRad())*getCoefVitesse()*getVitesse()*dt);
     }
 
     @Override
