@@ -20,8 +20,10 @@ public class JaugeVie extends Afficheurs {
     }
 
     public static void remove() {
-        JaugeVie jaugeVie = list.get(list.size()-1);
-        list.remove(jaugeVie);
-        jaugeVie.game().remove(jaugeVie);
+        if(!list.isEmpty()){
+            JaugeVie jaugeVie = list.get(list.size()-1);
+            list.remove(jaugeVie);
+            jaugeVie.game().remove(jaugeVie);
+        }
     }
 }

@@ -4,6 +4,7 @@ import iut.ObjetTouchable;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 /**
  * Created by MrMan on 30/05/2016.
@@ -15,6 +16,11 @@ public class Joueur extends ObjetTouchable implements KeyListener, MouseListener
     private double vitesse;
     private String nom;
     private boolean bloque;
+    /*
+    Array list qui stocke les ennemis et bonus touché par le joueur afin d'éviter le BUG qui se produit
+    quand un ennemis n'as pas eu le temps d'être remove mais que le effect est réappellé par le jeu
+     */
+    private ArrayList<Objet> listeCollision = new ArrayList<>();
 
     public Joueur(Game g, String nom, int x, int y) {
         super(g, nom, x, y);
@@ -26,15 +32,21 @@ public class Joueur extends ObjetTouchable implements KeyListener, MouseListener
 
     @Override
     public void effect(Objet objet) {
-        if (objet.isFriend()) {
+        if (objet.isFriend() && !listeCollision.contains(objet)) {
+            listeCollision.add(objet);
             game().remove(objet); //C'est un bonus
         }
-        if(objet.isEnnemy()) {
+        if(objet.isEnnemy() && !listeCollision.contains(objet)) {
+            listeCollision.add(objet);
             System.out.println("Life removed by" + objet);
+            game().remove(objet);
             vie--;
             JaugeVie.remove();
-            if(vie<=0)
+            if(vie<=0) {
                 game().remove(this);
+                Cartouches.removeAll();
+                cartouches = 0;
+            }
         }
     }
 

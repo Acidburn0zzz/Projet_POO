@@ -15,7 +15,8 @@ public class Alien2 extends Vaisseau {
     protected static int getHauteurSprite(){return 0;}
 
     public void specialMove(long dt){
-        moveX(Math.cos(getDirectionRad())*getCoefVitesse()*getVitesse()*dt);
+        setTempsTotal(getTempsTotal()+dt);
+        moveX(Math.cos(getDirectionRad())*getCoefVitesse()*getVitesse()*dt*(Math.sin(getTempsTotal()/100)+1));
         moveY(Math.sin(getDirectionRad())*getCoefVitesse()*getVitesse()*dt);
     }
 

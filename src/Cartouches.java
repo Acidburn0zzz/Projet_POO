@@ -24,4 +24,12 @@ public class Cartouches extends Afficheurs {
         cartouches.game().remove(cartouches);
         list.remove(cartouches);
     }
+
+    public static void removeAll() {
+        while (!list.isEmpty()) {
+            Cartouches cartouches = list.get(list.size() - 1);
+            cartouches.game().remove(cartouches);
+            list.remove(cartouches);
+        }
+    }
 }
