@@ -8,21 +8,20 @@ import java.util.ArrayList;
 public class JaugeVie extends Afficheurs {
     private static ArrayList<JaugeVie> list = new ArrayList<>();
     public JaugeVie(Joueur j) {
-        super(j.game(), "JaugeVie", list.size()*40, 20);
+        super(j.game(), "JaugeVie", list.size()*40+5, 10);
         j.game().add(this);
 
         if(list.isEmpty()){ //Crée premier
             list.add(this);
-            game().add(new JaugeVie(j));
-            game().add(new JaugeVie(j));
+            JaugeVie jaugeVie = new JaugeVie(j);
+            JaugeVie jaugeVie2 = new JaugeVie(j);
         }else
             list.add(this);
     }
 
-    @Override
-    public void remove() {
-        JaugeVie JaugeVie = list.get(list.size());
-        game().remove(JaugeVie);
-        list.remove(JaugeVie);
+    public static void remove() {
+        JaugeVie jaugeVie = list.get(list.size()-1);
+        list.remove(jaugeVie);
+        jaugeVie.game().remove(jaugeVie);
     }
 }

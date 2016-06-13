@@ -22,7 +22,6 @@ public class Bloqueur extends BonusMalus {
     public void move(long l) {
         duree -= l;
         if (duree<0){
-            joueur.enleveBonus(this);
             joueur.debloque();
             game().remove(this);
         }

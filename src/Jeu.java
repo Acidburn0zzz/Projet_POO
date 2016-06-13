@@ -16,10 +16,9 @@ public class Jeu extends Game {
     @Override
     protected void createObjects() {
         joueur = new Joueur(this, "Joueur", 100, this.getHeight()/2);
+        JaugeVie jaugeVie = new JaugeVie(joueur);
         this.add(joueur);
         addMouseInteractiveObject(joueur);
-        this.add(new Cartouches(joueur));
-        this.add(new JaugeVie(joueur));
         Niveau niveau = new Niveau(1, this);
         this.add(new Horloge(this, niveau));
     }

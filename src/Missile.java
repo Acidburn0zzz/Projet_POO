@@ -18,6 +18,12 @@ public class Missile extends BonusMalus {
             game().remove(this);
         }
     }
+
+    @Override
+    public boolean isFriend() {
+        return false;
+    }
+
     @Override
     public void move(long dt){
         moveX(10);

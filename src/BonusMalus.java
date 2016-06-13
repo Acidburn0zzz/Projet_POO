@@ -11,15 +11,8 @@ public abstract class BonusMalus extends ObjetTouchable {
         super(g, nom, x, y);
     }
 
-    @Override
-    public boolean isFriend() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnnemy() {
-        return false;
-    }
+    @Override public boolean isFriend() {return true;}
+    @Override public boolean isEnnemy() {return false;}
 
     @Override
     public void move(long l) {

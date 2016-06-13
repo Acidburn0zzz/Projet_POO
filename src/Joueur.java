@@ -4,7 +4,6 @@ import iut.ObjetTouchable;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.peer.KeyboardFocusManagerPeer;
 
 /**
  * Created by MrMan on 30/05/2016.
@@ -12,6 +11,7 @@ import java.awt.peer.KeyboardFocusManagerPeer;
 
 public class Joueur extends ObjetTouchable implements KeyListener, MouseListener, MouseMotionListener {
     private int vie;
+    private int cartouches;
     private double vitesse;
     private String nom;
     private boolean bloque;
@@ -19,32 +19,27 @@ public class Joueur extends ObjetTouchable implements KeyListener, MouseListener
     public Joueur(Game g, String nom, int x, int y) {
         super(g, nom, x, y);
         bloque = false;
-        vie = 1;
+        vie = 3;
         vitesse = 1;
+        cartouches = 0;
     }
 
     @Override
     public void effect(Objet objet) {
         if (objet.isFriend()) {
-            ajouteBonus((BonusMalus) objet);
-            game().remove(objet);
+            game().remove(objet); //C'est un bonus
         }
         if(objet.isEnnemy()) {
+            System.out.println("Life removed by" + objet);
             vie--;
-            if(vie>=0)
+            JaugeVie.remove();
+            if(vie<=0)
                 game().remove(this);
         }
     }
 
-    @Override
-    public boolean isFriend() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnnemy() {
-        return false;
-    }
+    @Override public boolean isFriend() {return true;}
+    @Override public boolean isEnnemy() {return false;}
 
     @Override
     public void move(long l) {
@@ -61,26 +56,14 @@ public class Joueur extends ObjetTouchable implements KeyListener, MouseListener
         }
     }
 
-    public String getNom() {
-        return nom;
-    }
+    public void addCartouches(int nb){cartouches += nb;}
+    public int getCartouches(){return cartouches;}
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
+    public String getNom() {return nom;}
+    public void setNom(String nom) {this.nom = nom;}
 
-    public void ajouteBonus(BonusMalus b){
-
-    }
-    public void enleveBonus(BonusMalus b){
-
-    }
-    public void debloque(){
-        bloque = false;
-    }
-    public void bloque(){
-        bloque = true;
-    }
+    public void debloque(){bloque = false;}
+    public void bloque(){bloque = true;}
 
     //KeyListenerInterface
         @Override public void keyTyped(KeyEvent e) {}
@@ -90,9 +73,12 @@ public class Joueur extends ObjetTouchable implements KeyListener, MouseListener
     //MouseListener Interface
         @Override
         public void mousePressed(MouseEvent e) {
-            game().add(new Missile(this, getMiddleX()+80, getMiddleY()));
+            if(cartouches!=0) {
+                game().add(new Missile(this, getMiddleX() + 80, getMiddleY()));
+                cartouches--;
+                Cartouches.remove();
+            }
         }
-
         @Override public void mouseClicked(MouseEvent e) {}
         @Override public void mouseReleased(MouseEvent e) {}
         @Override public void mouseEntered(MouseEvent e) {}

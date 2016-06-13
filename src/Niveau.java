@@ -18,6 +18,9 @@ public class Niveau {
     private int nxtAlien1;
     private int nxtAlien2;
 
+    private boolean bouclierSpawned;
+    private boolean packSpawned;
+
     Niveau(int numero, Game game){
         this.game = game;
         this.numero = numero;
@@ -32,6 +35,9 @@ public class Niveau {
         nxtAsteroide = (int) (tempsVague/nbAsteroide);
         nxtAlien1 = (int) (tempsVague/nbAlien1);
         nxtAlien2 = (int) (tempsVague/nbAlien2);
+
+        bouclierSpawned = false;
+        packSpawned = false;
     }
     public Objet NouvelObjet(long time){
         tempsActuel += time;
@@ -48,6 +54,12 @@ public class Niveau {
             alien2Spawned++;
             nxtAlien2 += tempsVague/nbAlien2;
             objet = new Alien2(game, game.getWidth(), MathJeu.randBorne(0,game.getHeight()-Alien2.getHauteurSprite()), 1);
+        }else if(!bouclierSpawned){ //Ajouter des formules pour le spawn
+            bouclierSpawned = true;
+            objet = new BonusBouclier(game, game.getWidth(), MathJeu.randBorne(0, game.getHeight()-40));
+        }else if(!packSpawned){
+            packSpawned = true;
+            objet = new Pack(game, game.getWidth(), MathJeu.randBorne(0, game.getHeight()-40)); //Corriger le -40
         }
         return objet;
     }

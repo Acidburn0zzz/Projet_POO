@@ -11,8 +11,6 @@ public abstract class Afficheurs extends Objet {
         super(g, nom, _x, _y);
     }
 
-    public abstract void remove();
-
     @Override public boolean collision(Objet objet) {return false;}
     @Override public void effect(Objet objet) {}
     @Override public boolean isFriend() {return false;}
