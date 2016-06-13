@@ -1,6 +1,5 @@
-import iut.Game;
-import iut.Objet;
-import iut.ObjetTouchable;
+import iut.*;
+import java.awt.*;
 
 import java.util.ArrayList;
 
@@ -12,6 +11,7 @@ public class Bouclier extends ObjetTouchable {
     private Joueur joueur;
     private int energie;
     private ArrayList<Objet> listeCollision = new ArrayList<>();
+
     public Bouclier(Joueur j) {
         super(j.game(), "Bouclier", j.getMiddleX()+80, j.getMiddleY());
         joueur = j;
@@ -40,6 +40,15 @@ public class Bouclier extends ObjetTouchable {
                 game().remove(this);
             }
         }
+    }
+
+    @Override
+    public void draw(Graphics g) throws Exception {
+        g.setColor(Color.green);
+        g.fillRect(5, 120, 120-(120*(10000-duree)/10000), 20);
+
+        Sprite s = SpriteStore.get().getSprite("Bouclier");
+        s.draw(g, getLeft(), getTop());
     }
 
     @Override public boolean isFriend() {return true;}

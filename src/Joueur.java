@@ -58,18 +58,29 @@ public class Joueur extends ObjetTouchable implements KeyListener, MouseListener
             double px = MouseInfo.getPointerInfo().getLocation().getY() - getMiddleY();
             if (Math.abs(px) > 2) {
                 if (Math.abs(px) <= vitesse * l) {
-                    moveY(px);
+                    if (px > 0) {
+                        if (getBottom() + px > game().getHeight())
+                            moveY(game().getHeight() - getBottom());
+                        else
+                            moveY(px);
+                    } else {
+                        if (getTop() + (px) < 0)
+                            moveY(-getTop());
+                        else
+                            moveY(px);
+                    }
                 } else {
-                    if (px > 0)
-                        if(getBottom() + vitesse*l > game().getHeight())
-                            moveY(game().getHeight()-getBottom());
+                    if (px > 0) {
+                        if (getBottom() + vitesse * l > game().getHeight())
+                            moveY(game().getHeight() - getBottom());
                         else
                             moveY(vitesse * l);
-                    else
-                        if(getTop()+(-vitesse*l) < 0)
+                    } else {
+                        if (getTop() + (-vitesse * l) < 0)
                             moveY(-getTop());
                         else
                             moveY(-vitesse * l);
+                    }
                 }
             }
         }else
