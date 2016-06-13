@@ -26,6 +26,9 @@ public class MathJeu {
         return (randBorne(3d, 5d)*Math.PI)/4; // On génére une direction aléatoire entre 45 et -45
     }
 
+    /**
+     * @return une direction entre -10 et 10 degrès
+     */
     public static double randomizeMalusTir20(){
         return (randBorne(-1d, 1d)*Math.PI)/18;
     }
