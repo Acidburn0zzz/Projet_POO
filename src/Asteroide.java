@@ -25,15 +25,6 @@ public abstract class Asteroide extends Ennemi {
         moveY(Math.sin(getDirectionRad())*getCoefVitesse()*getVitesse()*dt);
     }
 
-
-    protected static int getHauteurSprite(){return 0;}
-
-    @Override
-    protected boolean isDestructible() {
-        return true;
-    }
-
-
     protected abstract void split();
 
 }
