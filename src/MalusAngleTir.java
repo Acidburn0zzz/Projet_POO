@@ -16,6 +16,7 @@ public class MalusAngleTir extends ObjetTouchable{
         if(objet.isFriend() && !objet.isEnnemy()){
             Joueur joueur = (Joueur) objet;
             joueur.tirAleatoire(10000);
+            game().add(new JaugeMalusAngle(game()));
             game().remove(this);
         }
     }
