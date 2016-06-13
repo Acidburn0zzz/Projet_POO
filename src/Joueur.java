@@ -61,9 +61,15 @@ public class Joueur extends ObjetTouchable implements KeyListener, MouseListener
                     moveY(px);
                 } else {
                     if (px > 0)
-                        moveY(vitesse * l);
+                        if(getBottom() + vitesse*l > game().getHeight())
+                            moveY(game().getHeight()-getBottom());
+                        else
+                            moveY(vitesse * l);
                     else
-                        moveY(-vitesse * l);
+                        if(getTop()+(-vitesse*l) < 0)
+                            moveY(-getTop());
+                        else
+                            moveY(-vitesse * l);
                 }
             }
         }else
@@ -87,6 +93,8 @@ public class Joueur extends ObjetTouchable implements KeyListener, MouseListener
         @Override
         public void mousePressed(MouseEvent e) {
             if(cartouches!=0) {
+                Son son = new Son("Tir.mp3");
+                son.start();
                 game().add(new Missile(this, getMiddleX() + 80, getMiddleY()));
                 cartouches--;
                 Cartouches.remove();

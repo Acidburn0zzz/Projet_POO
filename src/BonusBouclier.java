@@ -13,6 +13,7 @@ public class BonusBouclier extends ObjetTouchable {
     @Override
     public void effect(Objet objet) {
         if (objet.isFriend() && !objet.isEnnemy()){
+            JaugeBouclier.removeAll();
             Joueur joueur = (Joueur) objet;
             Bouclier bouclier = new Bouclier(joueur);
             JaugeBouclier jaugeBouclier = new JaugeBouclier(joueur);

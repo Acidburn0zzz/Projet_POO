@@ -2,6 +2,8 @@ import iut.Game;
 import iut.Objet;
 import iut.ObjetTouchable;
 
+import java.util.ArrayList;
+
 /**
  * Created by MrMan on 30/05/2016.
  */
@@ -9,6 +11,7 @@ public class Bouclier extends ObjetTouchable {
     private int duree;
     private Joueur joueur;
     private int energie;
+    private ArrayList<Objet> listeCollision = new ArrayList<>();
     public Bouclier(Joueur j) {
         super(j.game(), "Bouclier", j.getMiddleX()+80, j.getMiddleY());
         joueur = j;
@@ -28,7 +31,8 @@ public class Bouclier extends ObjetTouchable {
 
     @Override
     public void effect(Objet objet) {
-        if (objet.isEnnemy() && !objet.isFriend()){
+        if (objet.isEnnemy() && !objet.isFriend() && !listeCollision.contains(objet)){
+            listeCollision.add(objet);
             System.out.println("Bouclier removed by : " + objet);
             energie--;
             JaugeBouclier.remove();
