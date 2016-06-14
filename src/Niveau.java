@@ -22,6 +22,7 @@ public class Niveau {
     private boolean packSpawned;
     private boolean bloqueurSpawned;
     private boolean vieSpawned;
+    private boolean vitesseSpawned= false;
 
     Niveau(int numero, Game game){
         this.game = game;
@@ -69,6 +70,9 @@ public class Niveau {
         }else if(!vieSpawned){
             vieSpawned = true;
             objet = new BonusVie(game ,game.getWidth(), MathJeu.randBorne(0, game.getHeight()-40));
+        }else if(!vitesseSpawned){
+            vitesseSpawned = true;
+            objet = new BonusVitesse(game, game.getWidth(), MathJeu.randBorne(0, game.getHeight()-40));
         }
         return objet;
     }

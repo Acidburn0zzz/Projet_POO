@@ -104,6 +104,7 @@ public class Joueur extends ObjetTouchable implements KeyListener, MouseListener
 
     public void bloque(int duree){this.dureeBloque = duree;}
     public void tirAleatoire(int duree){this.dureeTirAleatoire = duree;}
+    public void setVitesse(double vitesse) {this.vitesse = vitesse;}
     //KeyListenerInterface
         @Override public void keyTyped(KeyEvent e) {}
         @Override public void keyPressed(KeyEvent e) {}

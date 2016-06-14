@@ -3,28 +3,27 @@ import iut.Objet;
 import iut.ObjetTouchable;
 
 /**
- * Created by MrMan on 30/05/2016.
+ * Created by MrMan on 14/06/2016.
  */
-public class BonusBouclier extends ObjetTouchable {
-    public BonusBouclier(Game g, int x, int y) {
-        super(g, "BonusBouclier", x, y);
+public class BonusVitesse extends ObjetTouchable {
+    public BonusVitesse(Game g, int x, int y) {
+        super(g, "BonusVitesse", x, y);
     }
 
     @Override
     public void effect(Objet objet) {
         if (objet.isFriend() && !objet.isEnnemy()){
-            JaugeBouclier.removeAll();
             Joueur joueur = (Joueur) objet;
-            Bouclier bouclier = new Bouclier(joueur);
-            JaugeBouclier jaugeBouclier = new JaugeBouclier(joueur);
-            joueur.game().add(bouclier);
+            game().add(new JaugeBonusVitesse(joueur));
             joueur.game().remove(this);
         }
     }
 
     @Override public boolean isFriend() {return false;}
     @Override public boolean isEnnemy() {return false;}
-    @Override public void move(long l) {
+
+    @Override
+    public void move(long l) {
         moveX(-10);
         if(getLeft()<0)
             game().remove(this);
