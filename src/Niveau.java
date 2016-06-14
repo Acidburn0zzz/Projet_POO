@@ -27,16 +27,19 @@ public class Niveau {
     Niveau(int numero, Game game){
         this.game = game;
         this.numero = numero;
-        int coef = (int) (7*Math.sqrt(numero)); //7, 9, 12, 14, ...
-        tempsVague = (int) (2.8*coef)*1000; //*1000 pour le millisecondes.
+        int coef = numero; //7, 9, 12, 14, ...
+        tempsVague = (int) (coef*1000*10); //*1000 pour le millisecondes.
         tempsActuel = 0;
 
-        nbAsteroide = (int) (1.08 * coef); asteroideSpawned = 0;
-        nbAlien1 = (int) (0.75*coef); alien1Spawned = 0;
-        nbAlien2 = (int) (0.6*coef); alien2Spawned = 0;
+        nbAsteroide = (int)  (coef*Math.sqrt(coef)*0.5); asteroideSpawned = 0;
+        nbAlien1 = (int) (coef*Math.sqrt(coef)*4); alien1Spawned = 0;
+        nbAlien2 = (int) (coef*Math.sqrt(coef)*2); alien2Spawned = 0;
 
+        if(nbAsteroide!=0)
         nxtAsteroide = (int) (tempsVague/nbAsteroide);
+        if(nxtAlien1!=0)
         nxtAlien1 = (int) (tempsVague/nbAlien1);
+        if(nxtAlien2!=0)
         nxtAlien2 = (int) (tempsVague/nbAlien2);
 
         bouclierSpawned = false;
@@ -46,31 +49,31 @@ public class Niveau {
     public Objet NouvelObjet(long time){
         tempsActuel += time;
         Objet objet = null;
-        if(tempsActuel>=nxtAsteroide && nbAsteroide>= asteroideSpawned){
+        if(tempsActuel>=nxtAsteroide && nbAsteroide> asteroideSpawned && Math.random()>0.95){
             asteroideSpawned++;
             nxtAsteroide += tempsVague/nbAsteroide;
             objet = new GrandAsteroide(game, game.getWidth()-100, MathJeu.randBorne(0, game.getHeight()-100), 1);
-        }else if(tempsActuel>=nxtAlien1 && nbAlien1 >= alien1Spawned){
+        }else if(tempsActuel>=nxtAlien1 && nbAlien1 > alien1Spawned && Math.random()>0.95){
             alien1Spawned++;
             nxtAlien1 += tempsVague/nbAlien1;
             objet = new Alien1(game, game.getWidth(), MathJeu.randBorne(0, game.getHeight()-100), 1);
-        }else if(tempsActuel>=nxtAlien2 && nbAlien2 >= alien2Spawned){
+        }else if(tempsActuel>=nxtAlien2 && nbAlien2 > alien2Spawned && Math.random()>0.95){
             alien2Spawned++;
             nxtAlien2 += tempsVague/nbAlien2;
             objet = new Alien2(game, game.getWidth(), MathJeu.randBorne(0,game.getHeight()-100), 1);
-        }else if(!bouclierSpawned){ //Ajouter des formules pour le spawn
+        }else if(!bouclierSpawned && Math.random()>0.999){ //Ajouter des formules pour le spawn
             bouclierSpawned = true;
             objet = new BonusBouclier(game, game.getWidth(), MathJeu.randBorne(0, game.getHeight()-40));
-        }else if(!packSpawned){
+        }else if(!packSpawned && Math.random()>0.99){
             packSpawned = true;
-            objet = new Pack(game, game.getWidth(), MathJeu.randBorne(0, game.getHeight()-40)); //Corriger le -40
-        }else if(!bloqueurSpawned){
+            objet = new Pack(game, game.getWidth(), MathJeu.randBorne(0, game.getHeight()-40));
+        }else if(!bloqueurSpawned && Math.random()>0.999){
             bloqueurSpawned = true;
             objet = new Bloqueur(game, game.getWidth(), MathJeu.randBorne(0, game.getHeight()-40));
-        }else if(!vieSpawned){
+        }else if(!vieSpawned && Math.random()>0.999){
             vieSpawned = true;
             objet = new BonusVie(game ,game.getWidth(), MathJeu.randBorne(0, game.getHeight()-40));
-        }else if(!vitesseSpawned){
+        }else if(!vitesseSpawned && Math.random()>0.999){
             vitesseSpawned = true;
             objet = new BonusVitesse(game, game.getWidth(), MathJeu.randBorne(0, game.getHeight()-40));
         }

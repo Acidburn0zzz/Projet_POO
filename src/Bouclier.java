@@ -33,7 +33,6 @@ public class Bouclier extends ObjetTouchable {
     public void effect(Objet objet) {
         if (objet.isEnnemy() && !objet.isFriend() && !listeCollision.contains(objet)){
             listeCollision.add(objet);
-            System.out.println("Bouclier removed by : " + objet);
             energie--;
             JaugeBouclier.remove();
             if(energie<=0){
