@@ -18,9 +18,8 @@ public class Alien2 extends Vaisseau {
     }
 
     private void initThreeshold() {
-        threesholdMalus = MathJeu.randBorne(500d, 2000d);
+        threesholdMalus = MathJeu.randBorne(500d, 3000d);
     }
-
 
     public void specialMove(long dt){
         setTempsTotal(getTempsTotal()+dt);

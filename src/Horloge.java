@@ -2,6 +2,7 @@ import com.sun.org.apache.xalan.internal.xsltc.dom.NodeIteratorBase;
 import iut.Game;
 import iut.Objet;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -12,10 +13,14 @@ public class Horloge extends Objet {
     private long heureDebut;
     private long tempsVague;
     private Niveau niveau;
+    private Joueur joueur;
+    private boolean changeNomVaisseau;
 
-    public Horloge(Game g ,Niveau n) {
+    public Horloge(Game g, Joueur joueur, boolean changeNomVaisseau) {
         super(g, "Horloge", 0, 0); //Coordonées ?
-        changeNiveau(n);
+        this.changeNomVaisseau = changeNomVaisseau;
+        this.joueur = joueur;
+        changeNiveau(new Niveau(1, g));
     }
 
     @Override public boolean collision(Objet objet) {return false;}
@@ -28,11 +33,20 @@ public class Horloge extends Objet {
         g.setFont(new Font("Dialog", Font.PLAIN, 30));
         g.setColor(Color.BLACK);
         g.drawString(Integer.toString(niveau.getNumero()), 10, game().getHeight() -10);
+
         g.setFont(new Font("Dialog", Font.PLAIN, 28));
         g.setColor(Color.WHITE);
         g.drawString(Integer.toString(niveau.getNumero()), 10, game().getHeight() -10);
-        g.setColor(Color.green);
+
+        g.setColor(Color.GREEN);
         g.fillRect(50,game().height()-30, (int)(300*(tempsVague-heureDebut)/tempsVague), 20);
+
+        //Draw player name
+        if(changeNomVaisseau) {
+            g.setFont(new Font("Courrier", Font.BOLD, 25));
+            g.setColor(Color.BLACK);
+            g.drawString(joueur.getNom(), joueur.getLeft(), joueur.getTop() - 25);
+        }
     }
 
     @Override
@@ -51,5 +65,15 @@ public class Horloge extends Objet {
         niveau = n;
         tempsVague = n.waveLength();
         heureDebut = 0;
+        if(changeNomVaisseau){
+            String nomVaisseau = null;
+            while(nomVaisseau==null){
+                nomVaisseau = JOptionPane.showInputDialog(
+                        game().getParent(),
+                        "Selectionner un nouveau nom pour le vaisseau",
+                        JOptionPane.PLAIN_MESSAGE);
+            }
+            joueur.setNom(nomVaisseau);
+        }
     }
 }

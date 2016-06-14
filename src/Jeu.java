@@ -6,6 +6,7 @@ import iut.Objet;
 import iut.Sprite;
 import iut.SpriteStore;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class Jeu extends Game {
@@ -23,9 +24,23 @@ public class Jeu extends Game {
         JaugeVie jaugeVie = new JaugeVie(joueur);
         this.add(joueur);
         addMouseInteractiveObject(joueur);
-        Niveau niveau = new Niveau(1, this);
-        horloge = new Horloge(this, niveau);
+
+        Object[] options = {"Oui",
+                "Non"};
+        int n = JOptionPane.showOptionDialog(getParent(),
+                "Voulez vous changer le nom du vaisseau à chaque niveau",
+                "Configuration",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[1]);
+        if(n==0)
+            horloge = new Horloge(this, joueur, true);
+        else
+            horloge = new Horloge(this, joueur, false);
         this.add(horloge);
+
         Son son = new Son("Musique.mp3");
         son.start();
     }

@@ -129,5 +129,12 @@ public class Joueur extends ObjetTouchable implements KeyListener, MouseListener
         @Override public void mouseExited(MouseEvent e) {}
         @Override public void mouseDragged(MouseEvent e) {}
         @Override public void mouseMoved(MouseEvent e) {}
+
+    public void resetVie() {
+        for (int i = 0; i < 3-vie; i++) {
+            JaugeVie jaugeVie = new JaugeVie(this);
+        }
+        vie = 3;
+    }
 }
 
